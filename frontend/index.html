@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard - Phishing Website Detector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> 
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">   
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>PhishGuard</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#about">About</a></li>
+                <li class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Protect Yourself from Phishing Attacks</h1>
+                <p>Advanced AI-powered detection to keep your digital life secure</p>
+                <a href="#checker" class="cta-button">
+                    <i class="fas fa-search"></i> Check Now
+                </a>
+            </div>
+            <div class="hero-illustration">
+                <div class="animated-shield">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2>Why Choose PhishGuard?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Machine learning algorithms trained on millions of URLs</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Results</h3>
+                    <p>Get results in milliseconds with real-time analysis</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>100% Secure</h3>
+                    <p>Your data is never stored or shared with third parties</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>High Accuracy</h3>
+                    <p>95%+ accuracy rate in phishing detection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Checker Section -->
+    <section class="checker-section" id="checker">
+        <div class="container">
+            <div class="checker-wrapper">
+                <!-- Left Panel - Input -->
+                <div class="checker-left">
+                    <h2>Check Your URL</h2>
+                    <p class="subtitle">Enter a URL to check if it's legitimate or phishing</p>
+
+                    <form id="predictionForm" class="input-form">
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="urlInput" 
+                                class="url-input"
+                                placeholder="Enter URL here... (e.g., https://example.com)"
+                                autocomplete="off"
+                            >
+                            <div class="input-validation" id="urlValidation"></div>
+                        </div>
+
+                        <div class="check-methods">
+                            <label class="method-label">
+                                <input type="radio" name="method" value="features" checked>
+                                <span>URL Features</span>
+                            </label>
+                            <label class="method-label">
+                                <input type="radio" name="method" value="content">
+                                <span>Content Analysis</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-check">
+                            <i class="fas fa-magnifying-glass"></i>
+                            <span>Analyze URL</span>
+                        </button>
+                    </form>
+
+                    <div class="quick-links">
+                        <p>Quick examples:</p>
+                        <button type="button" class="quick-btn" onclick="fillExample('https://www.google.com')">
+                            Google
+                        </button>
+                        <button type="button" class="quick-btn" onclick="fillExample('https://www.facebook.com')">
+                            Facebook
+                        </button>
+                        <button type="button" class="quick-btn" onclick="fillExample('https://secure-paypal-login.com')">
+                            Suspicious
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Results -->
+                <div class="checker-right">
+                    <div id="resultPanel" class="result-panel hidden">
+                        <div class="result-card" id="resultContent"></div>
+                    </div>
+
+                    <div id="loadingPanel" class="loading-panel hidden">
+                        <div class="loading-spinner">
+                            <div class="spinner-ring"></div>
+                            <div class="spinner-ring"></div>
+                            <div class="spinner-ring"></div>
+                            <p>Analyzing URL...</p>
+                        </div>
+                    </div>
+
+                    <div id="errorPanel" class="error-panel hidden">
+                        <div class="error-content">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p id="errorMessage"></p>
+                        </div>
+                    </div>
+
+                    <div id="welcomePanel" class="welcome-panel">
+                        <div class="welcome-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Ready to Check?</h3>
+                        <p>Enter a URL on the left to get started</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Enter URL</h3>
+                    <p>Paste any URL you want to verify</p>
+                </div>
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Analysis</h3>
+                    <p>Our AI analyzes URL patterns and features</p>
+                </div>
+                <div class="step-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Results</h3>
+                    <p>Get instant verdict with confidence score</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stat-card">
+                <h3>1M+</h3>
+                <p>URLs Analyzed</p>
+            </div>
+            <div class="stat-card">
+                <h3>95%</h3>
+                <p>Accuracy Rate</p>
+            </div>
+            <div class="stat-card">
+                <h3>50K+</h3>
+                <p>Users Protected</p>
+            </div>
+            <div class="stat-card">
+                <h3>24/7</h3>
+                <p>Always Available</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2>About PhishGuard</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Cybersecurity Made Simple</h3>
+                    <p>PhishGuard is an advanced phishing detection system using machine learning to protect users from malicious websites. Our AI model is trained on millions of URLs to identify phishing attempts with high accuracy.</p>
+                    <ul class="about-list">
+                        <li><i class="fas fa-check"></i> Real-time URL analysis</li>
+                        <li><i class="fas fa-check"></i> Zero data storage policy</li>
+                        <li><i class="fas fa-check"></i> Continuous model updates</li>
+                        <li><i class="fas fa-check"></i> Free for everyone</li>
+                    </ul>
+                </div>
+                <!-- <div class="about-image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" alt="Security">
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>PhishGuard</h4>
+                    <p>Protecting users from phishing attacks with AI</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PhishGuard. All rights reserved. <b>Built by Tanu</b></p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
